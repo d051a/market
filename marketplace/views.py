@@ -2,7 +2,7 @@ from django.views.generic import ListView
 from .models import Stuff
 from django.shortcuts import redirect
 from .forms import SearchForm
-from .filters import StuffFilter
+# from .filters import StuffFilter
 
 
 def main_redirect(request):
@@ -10,7 +10,7 @@ def main_redirect(request):
 
 class StuffList(ListView):
 	context_object_name = 'stuff_list'
-	queryset = Stuff.tags.all()
+	queryset = Stuff.objects.all()
 	template_name = 'marketplace/stuff_list.html'
 	paginate_by = 25
 
@@ -24,6 +24,6 @@ class StuffList(ListView):
 
 	def get_context_data(self, **kwargs):
 		context =  super(StuffList,self).get_context_data(**kwargs)
-		context['filter'] = StuffFilter(self.request.GET, queryset=self.get_queryset())
+		# context['filter'] = StuffFilter(self.request.GET, queryset=self.get_queryset())
 		context['form'] = SearchForm()
 		return context

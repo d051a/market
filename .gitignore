@@ -1,0 +1,6 @@
+che__
+.idea/
+ACCOUNTING/media
+*/migrations/*.py
+*/migrations/*.pyc
+!*/migrations/__init__.py%

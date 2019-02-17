@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'datagraber',
+    # 'datagraber',
     'taggit',
     'marketplace',
-    'django_filters',
+    # 'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -78,15 +78,21 @@ WSGI_APPLICATION = 'market.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'NAME': 'market',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'd051a',
+#         'PASSWORD': 'qwerty!1'
+#     },
+# }
+
 DATABASES = {
     'default': {
-        'NAME': 'market',
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'd051a',
-        'PASSWORD': 'qwerty!1'
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
