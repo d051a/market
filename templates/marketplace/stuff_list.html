@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stuff_list</title>
+
+      <style>
+   table {
+    width: 100%; /* Ширина таблицы */
+    border: 4px double black; /* Рамка вокруг таблицы */
+    border-collapse: collapse; /* Отображать только одинарные линии */
+   }
+   th {
+    text-align: left; /* Выравнивание по левому краю */
+    background: #ccc; /* Цвет фона ячеек */
+    padding: 5px; /* Поля вокруг содержимого ячеек */
+    border: 1px solid black; /* Граница вокруг ячеек */
+   }
+   td {
+    padding: 5px; /* Поля вокруг содержимого ячеек */
+    border: 1px solid black; /* Граница вокруг ячеек */
+   }
+  </style>
+
+</head>
+<body>
+
+
+<form action="get">
+
+{{ form }}
+    <button type="submit">Найти</button>
+</form>
+
+
+<table>
+  <tr>
+    <th>{{ stuff.count }}</th>
+    <th>Название лота</th>
+    <th>Описание лота</th>
+    <th>Категория</th>
+        <th>Цена</th>
+    <th>Пересыл</th>
+    <th>Город</th>
+    <th>дата</th>
+    <th>теги</th>
+
+  </tr>
+    {% for stuff in stuff_list%}
+  <tr>
+    <td ><a href="{{ stuff.lot_url }}" target="_blank"><img src="{{ stuff.vk_image_tumb_url }}" alt="dasadad" height="150" width="200"></a></td>
+    <td style="width: 200px;"><a href="/admin/marketplace/stuff/{{ stuff.pk }}/change/" target="_blank">{{ stuff.title }}</a></td>
+    <td>{{ stuff.description }}</td>
+      <td>{{ stuff.stuff_subcategory }}</td>
+    <td>{{ stuff.price }}</td>
+    <td>{{ stuff.get_forwarding_display }}</td>
+    <td>{{ stuff.city }}</td>
+    <td style="width: 200px;">{{ stuff.date }}</td>
+    <td style="width: 200px;">
+        {% with names=stuff.tags.names %}
+        {% if names.count > 0 %}
+        <p>Теги: {%for name in names %}{% if not forloop.first %},
+        {% endif %}
+            <a href="{% url "home" %}?tag={{ name|urlencode }}">{{ name }}</a>{% endfor %}</p>
+            {% endif %}
+    {% endwith %}
+    </td>
+  </tr>
+    {% endfor %}
+</table>
+
+
+<nav aria-label="Page navigation">
+           {% if is_paginated %}
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+    {% else %}
+    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+  {% endif %}
+  {% for i in paginator.page_range %}
+    {% if page_obj.number == i %}
+      <li class="page-item disabled"><a class="page-link" href="#">{{ i }}</a></li>
+    {% else %}
+      <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+  {% endfor %}
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+    {% else %}
+    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Next</a></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</nav>
+</body>
+</html>
