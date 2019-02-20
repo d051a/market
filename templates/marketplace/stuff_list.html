@@ -25,10 +25,16 @@
 </head>
 <body>
 
+<h3>Полнотекстовой поиск:</h3>
+<form action="get">
+  <input type="text">
+  <button type="submit">Найти</button>
+</form>
 
+<h3>Фильтры:</h3>
 <form action="get">
 
-{{ form }}
+{{ form.as_p }}
     <button type="submit">Найти</button>
 </form>
 
@@ -48,7 +54,7 @@
   </tr>
     {% for stuff in stuff_list%}
   <tr>
-    <td ><a href="{{ stuff.lot_url }}" target="_blank"><img src="{{ stuff.vk_image_tumb_url }}" alt="dasadad" height="150" width="200"></a></td>
+    <td ><a href="{{ stuff.lot_url }}" target="_blank"><img src="{{ stuff.vk_image_tumb_url }}" alt="FOTO{{stuff.id}}" height="150" width="200"></a></td>
     <td style="width: 200px;"><a href="/admin/marketplace/stuff/{{ stuff.pk }}/change/" target="_blank">{{ stuff.title }}</a></td>
     <td>{{ stuff.description }}</td>
       <td>{{ stuff.stuff_subcategory }}</td>
