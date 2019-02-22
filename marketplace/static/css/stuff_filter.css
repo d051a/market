@@ -1,0 +1,16 @@
+.stuff_filter {
+    display: inline-block;
+    max-width: 30%;
+    margin-left: 30px;
+}
+.stuff_filter label {
+    margin: 10px 0 5px;
+    display: block;
+}
+.stuff_filter p {
+    margin: 0 0 10px;
+}
+.stuff_filter_submit {
+    margin-top: 10px;
+    display: block;
+}
